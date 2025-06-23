@@ -11,10 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap" rel="stylesheet">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <!-- AOS CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
 
     <!-- css link -->
     <link rel="stylesheet" href="./assests/css/style.css">
@@ -26,14 +26,14 @@
             <div class="container">
                 <div class="timeline-connector">
                     <div class="timeline-wrap">
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-year-block">
                                 <h2 class="timeline-year">
                                     2020
                                 </h2>
                             </div>
                         </div>
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-content-wrap">
                                 <div class="timeline-content-img">
                                     <img src="./assests/images/section/blog-img-1.png" alt="content-img">
@@ -53,14 +53,14 @@
                         </div>
                     </div>
                     <div class="timeline-wrap">
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-year-block">
                                 <h2 class="timeline-year">
                                     2021
                                 </h2>
                             </div>
                         </div>
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-content-wrap">
                                 <div class="timeline-content-img">
                                     <img src="./assests/images/section/blog-img-2.png" alt="content-img">
@@ -80,14 +80,14 @@
                         </div>
                     </div>
                     <div class="timeline-wrap">
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-year-block">
                                 <h2 class="timeline-year">
                                     2022
                                 </h2>
                             </div>
                         </div>
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-content-wrap">
                                 <div class="timeline-content-img">
                                     <img src="./assests/images/section/blog-img-3.png" alt="content-img">
@@ -107,14 +107,14 @@
                         </div>
                     </div>
                     <div class="timeline-wrap">
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-year-block">
                                 <h2 class="timeline-year">
                                     2023
                                 </h2>
                             </div>
                         </div>
-                        <div class="timeline-content-block">
+                        <div class="timeline-content-block" data-aos="fade-up">
                             <div class="timeline-content-wrap">
                                 <div class="timeline-content-img">
                                     <img src="./assests/images/section/blog-img-4.png" alt="content-img">
@@ -138,7 +138,16 @@
         </section>
     </main>
 
-    <script src="./assests/js/main.js"></script>
+    <!-- AOS JS -->
+    <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+    <script>
+        AOS.init({
+            duration: 1000, // animation duration in ms
+            once: true,     // animate only once
+            offset: 100     // how far from top before triggering
+        });
+    </script>
 </body>
 
 </html>

@@ -5,7 +5,8 @@
 }
 
 body {
-  font-family: "Raleway", sans-serif;
+  font-family: "Inter", sans-serif;
+  background: #f4f5f7;
 }
 
 .container {
@@ -35,19 +36,33 @@ body {
   top: 0;
   width: 2px;
   height: 100%;
-  background-color: #242424;
+  background: linear-gradient(to bottom, #7b2ff7, #f107a3);
+  animation: pulse 3s ease-in-out infinite;
+  z-index: 0;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 12px rgba(123, 47, 247, 0.6);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 24px rgba(241, 7, 163, 0.8);
+  }
 }
 
 .timeline-year {
-  background: linear-gradient(135deg, #5a0ef0, #8c45ff);
-  padding: 10px 20px;
-  color: white;
-  font-weight: bold;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(135deg, #7b2ff7, #f107a3);
+  padding: 6px 16px;
+  color: #fff;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(123, 47, 247, 0.3);
   font-family: "Manrope", sans-serif;
   font-size: 24px;
   letter-spacing: 1.5px;
-  border-radius: 50px;
+  border-radius: 999px;
 }
 
 .timeline-content-img {
@@ -88,30 +103,39 @@ body {
   display: flex;
 }
 
-.timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1) ::after {
+.timeline-wrap .timeline-content-block:has(.timeline-year-block)::after {
+  --dotts-width: 10px;
   content: "";
   position: absolute;
-  width: 10px;
-  height: 10px;
+  width: var(--dotts-width);
+  aspect-ratio: 1;
   top: 50%;
-  right: 0;
-  transform: translateX(6px) translateY(-5px);
-  z-index: 2;
   background-color: #242424;
   border-radius: 50%;
+  z-index: 3;
+
 }
 
-.timeline-wrap:nth-child(even) .timeline-content-block:nth-child(1) ::after {
-  content: "";
-  position: absolute;
-  width: 10px;
-  height: 10px;
-  top: 50%;
+.timeline-wrap:nth-child(even) .timeline-content-block:nth-child(1)::after {
+  right: auto;
   left: 0;
-  transform: translateX(-4px) translateY(-5px);
-  z-index: 2;
-  background-color: #242424;
-  border-radius: 50%;
+  transform: translateX(calc(-1 * var(--dotts-width) / 2)) translateY(-50%);
+}
+
+.timeline-wrap:nth-child(even) .timeline-content-block:nth-child(2)::after {
+  right: 0;
+  transform: translateX(calc(var(--dotts-width) / 2)) translateY(-50%);
+}
+
+.timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(2)::after {
+  right: auto;
+  left: 0;
+  transform: translateX(calc(-1 * var(--dotts-width) / 2)) translateY(-50%);
+}
+
+.timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1)::after {
+  right: 0;
+  transform: translateX(calc(var(--dotts-width) / 2)) translateY(-50%);
 }
 
 .timeline-wrap:nth-child(even) {
@@ -164,7 +188,29 @@ body {
   margin-left: calc(-1 * var(--spacing) + 10px);
 }
 
-@media (max-width: 768px) {
+.timeline-content-wrap {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding: 20px;
+}
+
+.timeline-content-wrap:hover {
+  transform: translateY(-8px);
+}
+
+@media (max-width: 767.99px) {
+  .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(1)::after,
+  .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(2)::after,
+  .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(2)::after,
+  .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1)::after {
+    right: auto;
+    left: 0;
+    transform: translateX(calc(-1 * var(--dotts-width) / 2)) translateY(-50%);
+  }
+
   .timeline-wrap {
     display: block;
     --spacing: 20px;
@@ -203,7 +249,12 @@ body {
   .timeline-connector
     .timeline-wrap:nth-child(odd)
     .timeline-content-block:nth-child(1)
-    .timeline-year-block ,.timeline-connector .timeline-wrap:nth-child(odd) .timeline-year-block, .timeline-connector .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(2) .timeline-year-block  {
+    .timeline-year-block,
+  .timeline-connector .timeline-wrap:nth-child(odd) .timeline-year-block,
+  .timeline-connector
+    .timeline-wrap:nth-child(even)
+    .timeline-content-block:nth-child(2)
+    .timeline-year-block {
     justify-content: flex-start;
   }
 

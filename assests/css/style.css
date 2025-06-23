@@ -233,12 +233,6 @@ body {
     width: 100%;
   }
 
-  .timeline-wrap::after {
-    top: 0;
-    left: 0;
-    transform: translateX(-6px) translateY(42px);
-  }
-
   .timeline-connector
     .timeline-wrap:nth-child(even)
     .timeline-content-block:nth-child(2) {
@@ -269,12 +263,12 @@ body {
   .timeline-connector
     .timeline-wrap:nth-child(odd)
     .timeline-content-block:nth-child(2)
-    .timeline-year-blockk {
+    .timeline-year-block {
     margin: 0;
   }
 
   .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1) ::after,
-  .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(1) ::after {
+  .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(1)::after {
     left: 0;
     transform: translateX(-6px) translateY(-5px);
   }

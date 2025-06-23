@@ -203,7 +203,7 @@ body {
   .timeline-connector
     .timeline-wrap:nth-child(odd)
     .timeline-content-block:nth-child(1)
-    .timeline-year-block {
+    .timeline-year-block ,.timeline-connector .timeline-wrap:nth-child(odd) .timeline-year-block, .timeline-connector .timeline-wrap:nth-child(even) .timeline-content-block:nth-child(2) .timeline-year-block  {
     justify-content: flex-start;
   }
 

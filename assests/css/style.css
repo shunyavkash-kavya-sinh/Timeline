@@ -93,6 +93,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px;
+  aspect-ratio: 1;
 }
 
 .timeline-content-img img {

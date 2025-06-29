@@ -199,6 +199,8 @@ body {
   .timeline-content-block:nth-child(2) {
   padding: var(--spacing);
   padding-left: 0;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .timeline-connector .timeline-wrap:nth-child(odd) .timeline-year-block {
@@ -477,7 +479,9 @@ body {
   max-width: 100%;
 }
 
-.timeline-sec-leftside .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1){
+.timeline-sec-leftside
+  .timeline-wrap:nth-child(odd)
+  .timeline-content-block:nth-child(1) {
   justify-content: flex-start;
 }
 

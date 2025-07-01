@@ -56,16 +56,26 @@ body {
   left: 50%;
   top: 0;
   width: 2px;
-  height: var(--line-height, 0%);
+  height: 100%;
   background: #14151a1a;
   z-index: 0;
-  transform: translateX(-50%);
-  transition: height 0.6s ease, background 0.3s ease;
 }
 
-.timeline-sec .timeline-wrap.in-view::before {
-  height: 100%;
+.timeline-sec .timeline-connector {
+  position: relative;
+  -webkit-mask-image: linear-gradient(black, black);
+  mask-image: linear-gradient(black, black);
+}
+
+.timeline-sec .timeline-connector::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 50%;
+  width: 2px;
+  height: 20%;
   background: #ff00ff;
+  z-index: -1;
 }
 
 .timeline-year {
@@ -252,6 +262,12 @@ body {
   line-height: 1.6;
   font-weight: 400;
 }
+
+/* .timeline-connector {
+  position: relative;
+}
+
+ */
 
 /* custom aos scrolling */
 
@@ -467,6 +483,10 @@ body {
   left: var(--before-left);
 }
 
+.timeline-sec-leftside .timeline-connector::after {
+  left: calc(var(--before-left) - 937px);
+}
+
 .timeline-sec-leftside .card-wrap,
 .timeline-sec-rightside .card-wrap {
   max-width: 100%;
@@ -593,7 +613,7 @@ body {
   .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(2)::after,
   .timeline-wrap:nth-child(odd) .timeline-content-block:nth-child(1)::after {
     right: auto;
-    left: -1px;
+    left: 7px;
     transform: translateX(calc(-1 * var(--dotts-width) / 2)) translateY(-50%);
   }
 
@@ -618,7 +638,7 @@ body {
   }
 
   .timeline-wrap::before {
-    left: -2px;
+    left: 6px;
   }
 
   .timeline-year-block {
@@ -702,6 +722,11 @@ body {
     max-width: 500px;
   }
 
+  .timeline-connector::after {
+    right: auto;
+    left: 22px;
+  }
+
   /* timeline-sec-compact v-2 */
 
   .timeline-sec-compact .card-wrap:nth-child(1)::after {
@@ -747,7 +772,7 @@ body {
     .timeline-wrap:nth-child(even)
     .timeline-content-block:nth-child(1)::after {
     right: auto;
-    left: 2px;
+    left: 8px;
   }
 
   .timeline-sec-leftside .timeline-content-block:nth-child(2)::before,
@@ -768,7 +793,7 @@ body {
   .timeline-sec-dark
     .timeline-wrap:nth-child(odd)
     .timeline-content-block:nth-child(1)::after {
-    left: 1px;
+    left: 7px;
   }
 
   /* v-4 */
@@ -776,8 +801,8 @@ body {
   .timeline-sec-rightside
     .timeline-wrap:nth-child(even)
     .timeline-content-block:nth-child(2)::after {
-    left: 0;
-    right: -1px;
+    right: auto;
+    left: 7px;
   }
 
   .timeline-sec-rightside
@@ -787,7 +812,7 @@ body {
   }
 
   .timeline-sec-rightside .timeline-wrap::before {
-    left: 0;
+    left: var(--before-left);
   }
 }
 

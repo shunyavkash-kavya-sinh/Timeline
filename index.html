@@ -20,15 +20,17 @@
 <body>
     <main>
         <section class="timeline-sec">
-            <h2 class="main-title" data-aos="fade-up">Vertical Timeline Card Image</h2>
-            <div class="main-dec" data-aos="fade-up">
-                <div class="richtext">
-                    <p>
-                        Showcase your milestones with visually engaging timeline cards that feature images,
-                        titles,
-                        and short descriptions — all
-                        stacked vertically for a clean chronological flow.
-                    </p>
+            <div class="container">
+                <h2 class="main-title" data-aos="fade-up">Vertical Timeline Card Image</h2>
+                <div class="main-dec" data-aos="fade-up">
+                    <div class="richtext">
+                        <p>
+                            Showcase your milestones with visually engaging timeline cards that feature images,
+                            titles,
+                            and short descriptions — all
+                            stacked vertically for a clean chronological flow.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="timeline-connector">
@@ -160,15 +162,17 @@
         </section>
 
         <section class="timeline-sec timeline-sec-compact">
-            <h2 class="main-title" data-aos="fade-up">Vertical Timeline Service Card</h2>
-            <div class="main-dec" data-aos="fade-up">
-                <div class="richtext">
-                    <p>
-                        Showcase key milestones or services year by year with this vertical timeline layout. Each
-                        card clearly presents a title,
-                        brief description, and call-to-action — all aligned alongside a central timeline for visual
-                        clarity and flow.
-                    </p>
+            <div class="container">
+                <h2 class="main-title" data-aos="fade-up">Vertical Timeline Service Card</h2>
+                <div class="main-dec" data-aos="fade-up">
+                    <div class="richtext">
+                        <p>
+                            Showcase key milestones or services year by year with this vertical timeline layout. Each
+                            card clearly presents a title,
+                            brief description, and call-to-action — all aligned alongside a central timeline for visual
+                            clarity and flow.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="timeline-connector">
@@ -298,14 +302,16 @@
         </section>
 
         <section class="timeline-sec timeline-sec-leftside">
-            <h2 class="main-title" data-aos="fade-up">Vertical Timeline Left Labels Service Card</h2>
-            <div class="main-dec" data-aos="fade-up">
-                <div class="richtext">
-                    <p>
-                        A clean vertical timeline with left-aligned month labels and right-side service cards. Ideal
-                        for showcasing milestones
-                        or project phases in a structured layout.
-                    </p>
+            <div class="container">
+                <h2 class="main-title" data-aos="fade-up">Vertical Timeline Left Labels Service Card</h2>
+                <div class="main-dec" data-aos="fade-up">
+                    <div class="richtext">
+                        <p>
+                            A clean vertical timeline with left-aligned month labels and right-side service cards. Ideal
+                            for showcasing milestones
+                            or project phases in a structured layout.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="timeline-connector">
@@ -406,15 +412,17 @@
         </section>
 
         <section class="timeline-sec timeline-sec-rightside">
-            <h2 class="main-title" data-aos="fade-up">Vertical Timeline Right Labels Service Card</h2>
-            <div class="main-dec" data-aos="fade-up">
-                <div class="richtext">
-                    <p>
-                        A clean vertical timeline with right-aligned service cards and right-side month labels.
-                        Ideal
-                        for showcasing milestones
-                        or project phases in a structured layout.
-                    </p>
+            <div class="container">
+                <h2 class="main-title" data-aos="fade-up">Vertical Timeline Right Labels Service Card</h2>
+                <div class="main-dec" data-aos="fade-up">
+                    <div class="richtext">
+                        <p>
+                            A clean vertical timeline with right-aligned service cards and right-side month labels.
+                            Ideal
+                            for showcasing milestones
+                            or project phases in a structured layout.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="timeline-connector">
@@ -514,14 +522,16 @@
         </section>
 
         <section class="timeline-sec timeline-sec-dark">
-            <h2 class="main-title" data-aos="fade-up">Vertical Timeline Dark Mode Service Card</h2>
-            <div class="main-dec" data-aos="fade-up">
-                <div class="richtext">
-                    <p>
-                        A clean dark-themed vertical timeline with year labels on the left and service cards on the
-                        right.
-                        Ideal for showcasing milestones or project phases in a visually balanced layout.
-                    </p>
+            <div class="container">
+                <h2 class="main-title" data-aos="fade-up">Vertical Timeline Dark Mode Service Card</h2>
+                <div class="main-dec" data-aos="fade-up">
+                    <div class="richtext">
+                        <p>
+                            A clean dark-themed vertical timeline with year labels on the left and service cards on the
+                            right.
+                            Ideal for showcasing milestones or project phases in a visually balanced layout.
+                        </p>
+                    </div>
                 </div>
             </div>
             <div class="timeline-connector">
@@ -679,17 +689,14 @@
 
     <script>
         if (
-            document.querySelector('.timeline-sec-leftside') ||
-            document.querySelector('.timeline-sec-rightside') ||
-            document.querySelector('.timeline-sec-dark') ||
-            document.querySelector('.timeline-sec') ||
-            document.querySelector('.timeline-connector')
+            document.querySelector('.timeline-sec')
         ) {
             function setMaxYearWidth(sectionSelector) {
+                const body = document.querySelector('body')
                 const section = document.querySelector(sectionSelector);
                 if (!section) return;
 
-                const isDesktop = window.innerWidth > 768;
+                const isDesktop = window.innerWidth > 767.;
                 const wraps = section.querySelectorAll('.timeline-wrap');
 
                 if (!isDesktop) {
@@ -699,8 +706,8 @@
                             yearBlock.style.flex = '';
                         }
                     });
-                    // Reset CSS var on mobile      
-                    section.style.setProperty('--before-left', '6px');
+                    section.style.setProperty('--before-left', '0px');
+                    body.style.setProperty('--before-left-fixed', '0px');
                     return;
                 }
 
@@ -722,27 +729,33 @@
 
                 section.style.setProperty('--before-left', `${maxWidth}px`);
 
+                let container = section.querySelector('.container')
+                    || section.querySelector('.dnd-section')
+                    || section.querySelector('.row-fluid')
+                    || section.querySelector('.module-wrapper');
+
+                if (container) {
+                    const containerLeftInSection = container.offsetLeft;
+                    const finalLeft = containerLeftInSection + maxWidth;
+
+                    section.style.setProperty('--before-left-fixed', `${finalLeft}px`);
+                } else {
+                    section.style.setProperty('--before-left-fixed', `${maxWidth}px`);
+                }
+
             }
 
             function applyYearWidths() {
                 setMaxYearWidth('.timeline-sec-leftside');
                 setMaxYearWidth('.timeline-sec-rightside');
                 setMaxYearWidth('.timeline-sec-dark');
+                setMaxYearWidth('timeline-sec-compact');
                 setMaxYearWidth('.timeline-sec');
             }
 
             window.addEventListener('load', applyYearWidths);
             window.addEventListener('resize', applyYearWidths);
         }
-
-        // const stikeyBar = document.querySelector('.timeline-connector')
-
-        //  let width = stikeyBar.offsetWidth;
-         
-        //  console.log(width);
-         
-        
-
     </script>
 
     <script>

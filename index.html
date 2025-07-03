@@ -688,27 +688,30 @@
     </main>
 
     <script>
-    //   if (document.querySelectorAll('[data-aos]').length > 0) {
-    //         const animateOnScroll = () => {
-    //             const elements = document.querySelectorAll('[data-aos]');
-    //             const observer = new IntersectionObserver((entries) => {
-    //                 entries.forEach(entry => {
-    //                     const el = entry.target;
-    //                     if (entry.isIntersecting) {
-    //                         const animation = el.getAttribute('data-aos');
-    //                         el.classList.add('aos-animate', `aos-${animation}`);
-    //                         observer.unobserve(el);
-    //                     }
-    //                 });
-    //             }, { threshold: 0.1 });
-    //             elements.forEach(el => observer.observe(el));
-    //         };
-    //         window.addEventListener('DOMContentLoaded', animateOnScroll);
-    //     }
+        if (document.querySelectorAll('[data-aos]').length > 0) {
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('[data-aos]');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const el = entry.target;
+                        if (entry.isIntersecting) {
+                            const animation = el.getAttribute('data-aos');
+                            el.classList.add('aos-animate', `aos-${animation}`);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                elements.forEach(el => observer.observe(el));
+            };
+            window.addEventListener('DOMContentLoaded', animateOnScroll);
+            window.addEventListener('load', animateOnScroll);
+            window.addEventListener('resize', animateOnScroll);
+            window.addEventListener('orientationchange', animateOnScroll);
+        }
 
         // timeline logical update
 
-       if (document.querySelector('.timeline-sec')) {
+        if (document.querySelector('.timeline-sec')) {
             function setMaxYearWidth(sectionSelector) {
                 const body = document.querySelector('body');
                 const section = document.querySelector(sectionSelector);

@@ -67,8 +67,8 @@ body {
   top: 0;
   width: 2px;
   height: 100%;
-  background: #14151a1a;
-  z-index: 0;
+  background:#14151a1a;
+  z-index: -1;
 }
 
 .timeline-connector {
@@ -106,7 +106,7 @@ body {
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 24px;
-  aspect-ratio: 1;
+  aspect-ratio: 1/0.8;
 }
 
 .card-img img {
@@ -291,6 +291,21 @@ body {
   opacity: 1;
   transform: translateY(0);
 }
+
+ .timeline-wrap:last-child{
+  position: relative;
+ }
+
+ .timeline-wrap:last-child::after{
+  content: '';
+   position: absolute;
+   width: 2px;
+   height: 100%;
+   top: 0;
+   left: 50%;
+   background:transparent;
+   z-index:0;
+  }
 
 /* timeline sec compact v-2 */
 

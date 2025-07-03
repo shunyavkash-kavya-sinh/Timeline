@@ -688,15 +688,33 @@
     </main>
 
     <script>
-        if (
-            document.querySelector('.timeline-sec')
-        ) {
+      if (document.querySelectorAll('[data-aos]').length > 0) {
+            const animateOnScroll = () => {
+                const elements = document.querySelectorAll('[data-aos]');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        const el = entry.target;
+                        if (entry.isIntersecting) {
+                            const animation = el.getAttribute('data-aos');
+                            el.classList.add('aos-animate', `aos-${animation}`);
+                            observer.unobserve(el);
+                        }
+                    });
+                }, { threshold: 0.1 });
+                elements.forEach(el => observer.observe(el));
+            };
+            window.addEventListener('DOMContentLoaded', animateOnScroll);
+        }
+
+        // timeline logical update
+
+       if (document.querySelector('.timeline-sec')) {
             function setMaxYearWidth(sectionSelector) {
-                const body = document.querySelector('body')
+                const body = document.querySelector('body');
                 const section = document.querySelector(sectionSelector);
                 if (!section) return;
 
-                const isDesktop = window.innerWidth > 767.;
+                const isDesktop = window.innerWidth > 767;
                 const wraps = section.querySelectorAll('.timeline-wrap');
 
                 if (!isDesktop) {
@@ -707,6 +725,7 @@
                         }
                     });
                     section.style.setProperty('--before-left', '0px');
+                    section.style.setProperty('--before-left-fixed', '0px');
                     body.style.setProperty('--before-left-fixed', '0px');
                     return;
                 }
@@ -734,51 +753,43 @@
                     || section.querySelector('.row-fluid')
                     || section.querySelector('.module-wrapper');
 
+                let containerLeftInSection = 0;
                 if (container) {
-                    const containerLeftInSection = container.offsetLeft;
-                    const finalLeft = containerLeftInSection + maxWidth;
-
-                    section.style.setProperty('--before-left-fixed', `${finalLeft}px`);
-                } else {
-                    section.style.setProperty('--before-left-fixed', `${maxWidth}px`);
+                    containerLeftInSection = container.getBoundingClientRect().left - section.getBoundingClientRect().left;
                 }
 
+                const finalLeft = containerLeftInSection + maxWidth;
+
+                section.style.setProperty('--before-left-fixed', `${finalLeft}px`);
+                body.style.setProperty('--before-left-fixed', `${finalLeft}px`);
             }
 
             function applyYearWidths() {
                 setMaxYearWidth('.timeline-sec-leftside');
                 setMaxYearWidth('.timeline-sec-rightside');
                 setMaxYearWidth('.timeline-sec-dark');
-                setMaxYearWidth('timeline-sec-compact');
+                setMaxYearWidth('.timeline-sec-compact');
                 setMaxYearWidth('.timeline-sec');
             }
 
             window.addEventListener('load', applyYearWidths);
             window.addEventListener('resize', applyYearWidths);
+            window.addEventListener('orientationchange', applyYearWidths);
+
+            // Also force re-check when breakpoint changes
+            let lastIsDesktop = window.innerWidth > 767;
+            window.addEventListener('resize', () => {
+                const nowIsDesktop = window.innerWidth > 767;
+                if (nowIsDesktop !== lastIsDesktop) {
+                    applyYearWidths();
+                }
+                lastIsDesktop = nowIsDesktop;
+            });
         }
+
     </script>
 
-    <script>
-        if (document.querySelectorAll('[data-aos]')) {
-            const animateOnScroll = () => {
-                const elements = document.querySelectorAll('[data-aos]');
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        const el = entry.target;
-                        if (entry.isIntersecting) {
-                            const animation = el.getAttribute('data-aos');
-                            el.classList.add('aos-animate', `aos-${animation}`);
-                            observer.unobserve(el);
-                        }
-                    });
-                }, {
-                    threshold: 0.1
-                });
-                elements.forEach(el => observer.observe(el));
-            };
-            window.addEventListener('DOMContentLoaded', animateOnScroll);
-        }
-    </script>
+
 </body>
 
 </html>

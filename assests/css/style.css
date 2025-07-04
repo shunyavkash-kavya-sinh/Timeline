@@ -783,10 +783,6 @@ body {
     white-space: wrap;
   }
 
- .timeline-content-block:empty {
-  display: none !important;
-}
-
   /* timeline-sec-compact v-2 */
 
   .timeline-sec-compact .card-wrap:nth-child(1)::after {

@@ -710,97 +710,97 @@
         }
 
         // timeline logical update
-    if (document.querySelector('.timeline-sec')) {
-        let yearBlockWidth = 0; // lock width once
+        if (document.querySelector('.timeline-sec')) {
+            let yearBlockWidth = 0; // lock width once
 
-        function setMaxYearWidth(sectionSelector) {
-            const body = document.querySelector('body');
-            const section = document.querySelector(sectionSelector);
-            if (!section) return;
+            function setMaxYearWidth(sectionSelector) {
+                const body = document.querySelector('body');
+                const section = document.querySelector(sectionSelector);
+                if (!section) return;
 
-            const isDesktop = window.innerWidth > 767;
-            const wraps = section.querySelectorAll('.timeline-wrap');
+                const isDesktop = window.innerWidth > 767;
+                const wraps = section.querySelectorAll('.timeline-wrap');
 
-            if (!isDesktop) {
-                wraps.forEach(wrap => {
-                    const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
-                    if (yearBlock) {
-                        const innerText = yearBlock.textContent.trim();
-                        if (!innerText || innerText === '') {
-                            yearBlock.style.display = 'none';
-                        } else {
-                            yearBlock.style.flex = '';
-                            yearBlock.style.width = '';
-                            yearBlock.style.display = '';
+                if (!isDesktop) {
+                    wraps.forEach(wrap => {
+                        const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
+                        if (yearBlock) {
+                            const innerText = yearBlock.textContent.trim();
+                            if (!innerText || innerText === '') {
+                                yearBlock.style.display = 'none';
+                            } else {
+                                yearBlock.style.flex = '';
+                                yearBlock.style.width = '';
+                                yearBlock.style.display = '';
+                            }
                         }
-                    }
-                });
-                section.style.setProperty('--before-left', '0px');
-                section.style.setProperty('--before-left-fixed', '0px');
-                body.style.setProperty('--before-left-fixed', '0px');
-                yearBlockWidth = 0; // reset
-                return;
-            }
+                    });
+                    section.style.setProperty('--before-left', '0px');
+                    section.style.setProperty('--before-left-fixed', '0px');
+                    body.style.setProperty('--before-left-fixed', '0px');
+                    yearBlockWidth = 0; // reset
+                    return;
+                }
 
-            if (yearBlockWidth === 0) {
+                if (yearBlockWidth === 0) {
+                    wraps.forEach(wrap => {
+                        const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
+                        if (yearBlock) {
+                            const width = yearBlock.offsetWidth;
+                            if (width > yearBlockWidth) yearBlockWidth = width;
+                        }
+                    });
+                }
+
                 wraps.forEach(wrap => {
                     const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
                     if (yearBlock) {
-                        const width = yearBlock.offsetWidth;
-                        if (width > yearBlockWidth) yearBlockWidth = width;
+                        yearBlock.style.flex = `0 0 ${yearBlockWidth}px`;
                     }
                 });
-            }
 
-            wraps.forEach(wrap => {
-                const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
-                if (yearBlock) {
-                    yearBlock.style.flex = `0 0 ${yearBlockWidth}px`;
+                section.style.setProperty('--before-left', `${yearBlockWidth}px`);
+
+                let container = section.querySelector('.container')
+                    || section.querySelector('.dnd-section')
+                    || section.querySelector('.row-fluid')
+                    || section.querySelector('.module-wrapper');
+
+                let containerLeftInSection = 0;
+                if (container) {
+                    containerLeftInSection = container.getBoundingClientRect().left - section.getBoundingClientRect().left;
                 }
-            });
 
-            section.style.setProperty('--before-left', `${yearBlockWidth}px`);
+                const finalLeft = containerLeftInSection + yearBlockWidth;
 
-            let container = section.querySelector('.container')
-                || section.querySelector('.dnd-section')
-                || section.querySelector('.row-fluid')
-                || section.querySelector('.module-wrapper');
-
-            let containerLeftInSection = 0;
-            if (container) {
-                containerLeftInSection = container.getBoundingClientRect().left - section.getBoundingClientRect().left;
+                section.style.setProperty('--before-left-fixed', `${finalLeft}px`);
+                body.style.setProperty('--before-left-fixed', `${finalLeft}px`);
             }
 
-            const finalLeft = containerLeftInSection + yearBlockWidth;
+            function applyYearWidths() {
+                setMaxYearWidth('.timeline-sec-leftside');
+                setMaxYearWidth('.timeline-sec-rightside');
+                setMaxYearWidth('.timeline-sec-dark');
+            }
 
-            section.style.setProperty('--before-left-fixed', `${finalLeft}px`);
-            body.style.setProperty('--before-left-fixed', `${finalLeft}px`);
-        }
-
-        function applyYearWidths() {
-            setMaxYearWidth('.timeline-sec-leftside');
-            setMaxYearWidth('.timeline-sec-rightside');
-            setMaxYearWidth('.timeline-sec-dark');
-        }
-
-        window.addEventListener('load', applyYearWidths);
-        window.addEventListener('resize', () => {
-            yearBlockWidth = 0; // force recalculate
-            applyYearWidths();
-        });
-        window.addEventListener('orientationchange', applyYearWidths);
-        window.addEventListener('click', applyYearWidths);
-
-        let lastIsDesktop = window.innerWidth > 767;
-        window.addEventListener('resize', () => {
-            const nowIsDesktop = window.innerWidth > 767;
-            if (nowIsDesktop !== lastIsDesktop) {
-                yearBlockWidth = 0; // force recalculate on breakpoint change
+            window.addEventListener('load', applyYearWidths);
+            window.addEventListener('resize', () => {
+                yearBlockWidth = 0; // force recalculate
                 applyYearWidths();
-            }
-            lastIsDesktop = nowIsDesktop;
-        });
-    }
+            });
+            window.addEventListener('orientationchange', applyYearWidths);
+            window.addEventListener('click', applyYearWidths);
+
+            let lastIsDesktop = window.innerWidth > 767;
+            window.addEventListener('resize', () => {
+                const nowIsDesktop = window.innerWidth > 767;
+                if (nowIsDesktop !== lastIsDesktop) {
+                    yearBlockWidth = 0; // force recalculate on breakpoint change
+                    applyYearWidths();
+                }
+                lastIsDesktop = nowIsDesktop;
+            });
+        }
 
     </script>
 </body>

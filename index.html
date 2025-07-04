@@ -688,7 +688,7 @@
     </main>
 
     <script>
-      if (document.querySelectorAll('[data-aos]').length > 0) {
+        if (document.querySelectorAll('[data-aos]').length > 0) {
             const animateOnScroll = () => {
                 const elements = document.querySelectorAll('[data-aos]');
                 const observer = new IntersectionObserver((entries) => {
@@ -724,7 +724,13 @@
                     wraps.forEach(wrap => {
                         const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
                         if (yearBlock) {
-                            yearBlock.style.flex = '';
+                            if (yearBlock.innerHTML.trim() === '') {
+                                yearBlock.style.display = 'none';
+                            } else {
+                                yearBlock.style.flex = '';
+                                yearBlock.style.width = '';
+                                yearBlock.style.display = ''; // reset any display
+                            }
                         }
                     });
                     section.style.setProperty('--before-left', '0px');

@@ -720,16 +720,17 @@
                 const isDesktop = window.innerWidth > 767;
                 const wraps = section.querySelectorAll('.timeline-wrap');
 
-                if (!isDesktop) {
+              if (!isDesktop) {
                     wraps.forEach(wrap => {
                         const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
                         if (yearBlock) {
-                            if (yearBlock.innerHTML.trim() === '') {
+                            const innerText = yearBlock.textContent.trim();
+                            if (!innerText || innerText === '') {
                                 yearBlock.style.display = 'none';
                             } else {
                                 yearBlock.style.flex = '';
                                 yearBlock.style.width = '';
-                                yearBlock.style.display = ''; // reset any display
+                                yearBlock.style.display = '';
                             }
                         }
                     });

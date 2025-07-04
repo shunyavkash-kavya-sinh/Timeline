@@ -309,7 +309,7 @@ body {
   letter-spacing: 1px;
 }
 
-.timeline-sec-compact .timeline-connector::after{
+.timeline-sec-compact .timeline-connector::after {
   background: #2575fc;
 }
 
@@ -402,9 +402,7 @@ body {
   display: inline-block;
 }
 
-.timeline-sec-compact
-  .timeline-wrap
-  .timeline-content-block:has(.card-wrap) {
+.timeline-sec-compact .timeline-wrap .timeline-content-block:has(.card-wrap) {
   flex-direction: column;
 }
 
@@ -780,6 +778,14 @@ body {
   .timeline-sec-compact .timeline-connector::after {
     left: calc(var(--before-left-fixed) + var(--container-spacing));
   }
+
+  .timeline-year {
+    white-space: wrap;
+  }
+
+ .timeline-content-block:empty {
+  display: none !important;
+}
 
   /* timeline-sec-compact v-2 */
 

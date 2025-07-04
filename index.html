@@ -688,7 +688,7 @@
     </main>
 
     <script>
-        if (document.querySelectorAll('[data-aos]').length > 0) {
+      if (document.querySelectorAll('[data-aos]').length > 0) {
             const animateOnScroll = () => {
                 const elements = document.querySelectorAll('[data-aos]');
                 const observer = new IntersectionObserver((entries) => {
@@ -771,15 +771,13 @@
                 setMaxYearWidth('.timeline-sec-leftside');
                 setMaxYearWidth('.timeline-sec-rightside');
                 setMaxYearWidth('.timeline-sec-dark');
-                setMaxYearWidth('.timeline-sec-compact');
-                setMaxYearWidth('.timeline-sec');
             }
 
             window.addEventListener('load', applyYearWidths);
             window.addEventListener('resize', applyYearWidths);
             window.addEventListener('orientationchange', applyYearWidths);
+            window.addEventListener('click', applyYearWidths);
 
-            // Also force re-check when breakpoint changes
             let lastIsDesktop = window.innerWidth > 767;
             window.addEventListener('resize', () => {
                 const nowIsDesktop = window.innerWidth > 767;

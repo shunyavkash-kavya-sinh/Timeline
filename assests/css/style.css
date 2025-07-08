@@ -10,7 +10,6 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  /* outline: auto; */
 }
 
 body {
@@ -50,7 +49,6 @@ body {
 
 .timeline-sec {
   padding-block: 100px;
-  /* margin-bottom: 1000px; */
 }
 
 .timeline-wrap {
@@ -326,6 +324,9 @@ body {
   position: relative;
   background-color: #ffffff;
   max-width: 100%;
+  display: block;
+  margin-bottom: 16px;
+  max-width: 100%;
 }
 
 .timeline-sec-compact
@@ -387,15 +388,6 @@ body {
 
 .timeline-sec-compact .card-title {
   font-size: 26px;
-}
-
-.timeline-sec-compact .card-wrap {
-  display: block;
-  max-width: 100%;
-}
-
-.timeline-sec-compact .card-wrap {
-  margin-bottom: 16px;
 }
 
 .timeline-sec-compact .btn {

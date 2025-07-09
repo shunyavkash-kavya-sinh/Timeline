@@ -656,14 +656,31 @@
 
         if (document.querySelector('.timeline-sec')) {
             function setMaxYearWidth(sectionSelector) {
-                const body = document.querySelector('body');
                 const section = document.querySelector(sectionSelector);
                 if (!section) return;
 
                 const isDesktop = window.innerWidth > 768;
                 const wraps = section.querySelectorAll('.timeline-wrap');
 
-                if (!isDesktop) {
+                if (isDesktop) {
+                    let maxWidth = 0;
+                    wraps.forEach(wrap => {
+                        const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
+                        if (yearBlock) {
+                            const width = yearBlock.offsetWidth;
+                            if (width > maxWidth) maxWidth = width;
+                        }
+                    });
+
+                    wraps.forEach(wrap => {
+                        const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
+                        if (yearBlock) {
+                            yearBlock.style.flex = `0 0 ${maxWidth}px`;
+                        }
+                    });
+
+                    section.style.setProperty('--before-left', `${maxWidth}px`);
+                } else {
                     wraps.forEach(wrap => {
                         const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
                         if (yearBlock) {
@@ -671,30 +688,10 @@
                         }
                     });
                     section.style.setProperty('--before-left', '0px');
-                    return;
                 }
-
-                let maxWidth = 0;
-                wraps.forEach(wrap => {
-                    const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
-                    if (yearBlock) {
-                        const width = yearBlock.offsetWidth;
-                        if (width > maxWidth) maxWidth = width;
-                    }
-                });
-
-                wraps.forEach(wrap => {
-                    const yearBlock = wrap.querySelector('.timeline-content-block:has(.timeline-year-block)');
-                    if (yearBlock) {
-                        yearBlock.style.flex = `0 0 ${maxWidth}px`;
-                    }
-                });
-
-                section.style.setProperty('--before-left', `${maxWidth}px`);
             }
 
             function applyYearWidths() {
-                setMaxYearWidth('.timeline-sec-compact');
                 setMaxYearWidth('.timeline-sec-leftside');
                 setMaxYearWidth('.timeline-sec-rightside');
                 setMaxYearWidth('.timeline-sec-dark');
@@ -702,14 +699,8 @@
 
             window.addEventListener('load', applyYearWidths);
             window.addEventListener('resize', applyYearWidths);
-
-            window.addEventListener('resize', () => {
-                const nowIsDesktop = window.innerWidth > 768;
-                if (!nowIsDesktop) {
-                    applyYearWidths();
-                }
-            });
         }
+
 
         // timeline scrolling js
 
@@ -722,12 +713,12 @@
 
                     timeLineElms.forEach((timeLineElm) => {
                         const rect = timeLineElm.getBoundingClientRect();
-                        const elementTop = rect.top + window.scrollY; 
+                        const elementTop = rect.top + window.scrollY;
                         const elementHeight = timeLineElm.clientHeight;
 
                         if ((userScrollY + 200) > elementTop) {
                             timeLineElm.style.setProperty("--section-scrollY", `${userScrollY - elementTop + 200}px`);
-                        } else { 
+                        } else {
                             timeLineElm.style.setProperty("--section-scrollY", `0px`);
                         }
                     });
